@@ -1,0 +1,10 @@
+.konvajs-content {
+  background: rgb(241, 238, 233);
+}
+canvas {
+  background: rgb(240, 213, 213);
+}
+
+#root {
+  height: 100%;
+}

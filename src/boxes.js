@@ -1,7 +1,7 @@
 import React from "react"
 import { Stage, Layer, Rect, Transformer, Text, Group } from "react-konva"
 
-import "./styles.css"
+import "./boxes.css"
 
 const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
   const shapeRef = React.useRef()
@@ -81,8 +81,8 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
 
 const initialRectangles = [
   {
-    x: 10,
-    y: 10,
+    x: 35,
+    y: 35,
     width: 100,
     height: 50,
     fill: "#b5cef5",
@@ -114,7 +114,7 @@ const initialRectangles = [
   }
 ]
 
-const App = () => {
+const Boxes = () => {
   const [rectangles, setRectangles] = React.useState(initialRectangles)
   const [selectedId, selectShape] = React.useState(null)
   const canvasRef = React.useRef()
@@ -128,20 +128,20 @@ const App = () => {
   }
 
   return (
-    <div style={{ background: "#eee" }}>
+    <div style={{ background: "#eee", height: "100%" }}>
       <Stage
-        width={width + 10}
-        height={height + 10}
+        width={width + 50}
+        height={height + 50}
         draggable
         onMouseDown={checkDeselect}
         onTouchStart={checkDeselect}
         opacity={1}
-        style={{ background: "#ffa" }}
+        fill="#fff"
       >
         <Layer ref={canvasRef} style={{ background: "#f00" }} opacity={1}>
           <Rect
-            x={5}
-            y={5}
+            x={25}
+            y={25}
             width={width}
             height={height}
             opacity={1}
@@ -174,8 +174,9 @@ const App = () => {
           })}
         </Layer>
       </Stage>
+      Hello
     </div>
   )
 }
 
-export default App
+export default Boxes
