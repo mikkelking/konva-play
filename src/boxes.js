@@ -1,6 +1,6 @@
 import React from "react"
 import { Stage, Layer, Rect, Transformer, Text, Group } from "react-konva"
-
+import URLImage from "./url-image"
 import "./boxes.css"
 
 const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
@@ -32,6 +32,8 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
         <Rect
           ref={shapeRef}
           {...shapeProps}
+          stroke="black"
+          strokeWidth={1}
           onTransformEnd={(e) => {
             // transformer is changing scale of the node
             // and NOT its width or height
@@ -98,9 +100,9 @@ const initialRectangles = [
     fill: "#d0f5d2",
     id: "cus2",
     name: "Jo",
-    color: "black",
-    shadowBlur: 10,
-    cornerRadius: 10
+    color: "black"
+    // shadowBlur: 10,
+    // cornerRadius: 10
   },
   {
     x: 270,
@@ -139,6 +141,15 @@ const Boxes = () => {
         fill="#fff"
       >
         <Layer ref={canvasRef} style={{ background: "#f00" }} opacity={1}>
+          <URLImage
+            src="/invoice.png"
+            x={25}
+            y={25}
+            width={width}
+            height={height}
+            scaleX={0.7}
+            scaleY={0.7}
+          />
           <Rect
             x={25}
             y={25}
@@ -174,7 +185,6 @@ const Boxes = () => {
           })}
         </Layer>
       </Stage>
-      Hello
     </div>
   )
 }
