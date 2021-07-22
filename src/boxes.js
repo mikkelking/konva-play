@@ -1,6 +1,7 @@
 import React from "react"
 import { Stage, Layer, Rect, Transformer, Text, Group } from "react-konva"
 import URLImage from "./url-image"
+import PdfView from "./load-quixote"
 import "./boxes.css"
 
 const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
@@ -119,13 +120,24 @@ const initialRectangles = [
 const Boxes = () => {
   const [rectangles, setRectangles] = React.useState(initialRectangles)
   const [selectedId, selectShape] = React.useState(null)
+  const [bgImage, setBG] = React.useState("/invoice.png")
   const canvasRef = React.useRef()
-  const [width, height] = [600, 800]
+  const [width, height] = [595, 845]
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target === e.target.getStage()
     if (clickedOnEmpty) {
       selectShape(null)
+    }
+  }
+
+  const getImg = (page) => {
+    const c = document.getElementsByClassName("react-pdf__Page__canvas")
+    console.log(c[page - 1])
+    if (c && c.length) {
+      const img = c[page - 1].toDataURL()
+      console.log(img)
+      setBG(img)
     }
   }
 
@@ -142,13 +154,13 @@ const Boxes = () => {
       >
         <Layer ref={canvasRef} style={{ background: "#f00" }} opacity={1}>
           <URLImage
-            src="/invoice.png"
+            src={bgImage}
             x={25}
             y={25}
             width={width}
             height={height}
-            scaleX={0.7}
-            scaleY={0.7}
+            scaleX={1}
+            scaleY={1}
           />
           <Rect
             x={25}
@@ -185,6 +197,15 @@ const Boxes = () => {
           })}
         </Layer>
       </Stage>
+      <button onClick={() => getImg(1)}>Grab page 1</button>&nbsp;
+      <button onClick={() => getImg(2)}>Grab page 2</button>
+      <button onClick={() => getImg(3)}>Grab page 3</button>
+      <PdfView
+        style={{
+          width: width + 100,
+          height: height + 100
+        }}
+      ></PdfView>
     </div>
   )
 }
